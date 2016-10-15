@@ -7,9 +7,9 @@ function Counter({ count, onPlusClick, onMinusClick }) {
   return (
     <div className="Counter">
       <p>
-        <button className="Counter__IncrementButton" onClick={onMinusClick}>-</button>
+        <button className="Counter__DecrementButton" onClick={onMinusClick}>-</button>
         {count}
-        <button className="Counter__DecrementButton" onClick={onPlusClick}>+</button>
+        <button className="Counter__IncrementButton" onClick={onPlusClick}>+</button>
       </p>
     </div>
   );

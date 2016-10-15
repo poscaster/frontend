@@ -6,7 +6,7 @@ export default function makeStore() {
 
   if (module.hot) {
     module.hot.accept('./modules', () => {
-      const nextReducer = require('./modules');
+      const nextReducer = require('./modules'); // eslint-disable-line global-require
 
       store.replaceReducer(nextReducer);
     });
