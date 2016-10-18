@@ -13,6 +13,10 @@
 
     npm run dev:serve
 
+Run on a custom port:
+
+    npm run dev:serve -- --port 8888
+
 ### Development
 
 Check styling with `npm run lint`.

@@ -1,6 +1,7 @@
 {
   "name": "poscaster",
   "version": "0.0.0",
+  "repository": "git://github.com/poscaster/frontend.git",
   "scripts": {
     "lint": "eslint --ext js,jsx src specs",
     "build": "webpack --config webpack.prod.config.js",
