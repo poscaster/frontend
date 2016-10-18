@@ -21,7 +21,7 @@ module.exports = {
     }, {
       test: /\.sass$/,
       exclude: /node_modules/,
-      loaders: ['style', 'css', 'autoprefixer-loader', 'sass'],
+      loaders: ['style', 'css', 'postcss', 'sass'],
     }, {
       test: /\.(jpg|png|gif)$/,
       loader: 'url-loader?limit=8192',
@@ -37,6 +37,9 @@ module.exports = {
     extensions: ['', '.js', '.json', '.jsx', '.jsx', '.sass'],
   },
   target: 'web',
+  postcss: function() {
+    return [ require('autoprefixer') ];
+  },
   plugins: [
     new webpack.DefinePlugin({
       API_BASE: `'${process.env.API_BASE || '/api'}'`,
