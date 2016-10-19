@@ -7,4 +7,10 @@ config.plugins.push(
 );
 config.eslint = { failOnError: true };
 
+config.plugins.unshift(
+  new webpack.DefinePlugin({
+    'process.env': { NODE_ENV: '"production"' },
+  })
+);
+
 module.exports = config;
