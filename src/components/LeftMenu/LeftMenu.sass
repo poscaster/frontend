@@ -1,0 +1,32 @@
+@import '../../stylesheets/_base'
+
+.LeftMenu
+  background-color: $secondary-bg-color-dark
+  color: $secondary-color
+  float: left
+  height: 100vh
+  overflow-x: hidden
+
+.LeftMenu--Expanded
+  width: 18%
+  min-width: 240px
+
+.LeftMenu--Collapsed
+  width: 40px
+
+.LeftMenu__ToggleBtn
+  background-color: $secondary-bg-color
+  color: inherit
+  cursor: pointer
+  border: none
+  float: right
+  font-weight: bold
+  height: 26px
+  margin: 7px
+  outline: none
+  width: 26px
+
+.LeftMenu__Content
+  background-color: $secondary-bg-color
+  clear: both
+  height: calc(100% - 40px);

@@ -22,12 +22,14 @@
   },
   "dependencies": {
     "immutable": "^3.8.1",
+    "normalize.css": "^5.0.0",
     "react": "~15.3.0",
     "react-dom": "~15.3.0",
     "react-redux": "~4.4.5",
     "react-router": "^2.8.1",
     "react-router-redux": "^4.0.6",
-    "redux": "~3.6.0"
+    "redux": "~3.6.0",
+    "redux-saga": "^0.12.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.5.1",

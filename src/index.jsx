@@ -7,6 +7,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import makeStore from './store';
 import App from './components/App/App';
 import Home from './components/Home/Home';
+import './stylesheets/styles.sass';
 
 const store = makeStore();
 

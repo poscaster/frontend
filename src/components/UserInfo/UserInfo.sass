@@ -1,0 +1,25 @@
+@import '../../stylesheets/_base'
+
+.UserInfo
+
+.UserInfo__Tabs
+  margin: 0 10px 5px
+  padding: 8px 0 0
+
+.UserInfo__Tab
+  display: inline
+
+.UserInfo__Tab a
+  border-bottom: 1px solid $secondary-color
+  color: $secondary-color
+  padding: 2px 5px
+  text-decoration: none
+
+.UserInfo__Tab a:hover
+  border-bottom-width: 2px
+  text-shadow: 2px 2px mix($secondary-color, $secondary-bg-color, 20%)
+
+.UserInfo__Tab--Active a
+  border-bottom-color: $secondary-color-lighter
+  color: $secondary-color-lighter
+  text-shadow: 1px 1px mix($secondary-color, $secondary-bg-color, 40%)
