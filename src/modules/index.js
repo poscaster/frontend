@@ -9,5 +9,5 @@ export default combineReducers({
   routing: routerReducer,
   auth,
   counter,
-  layout
+  layout,
 }, undefined);

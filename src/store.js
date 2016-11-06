@@ -7,7 +7,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 export default function makeStore() {
   const store = createStore(reducer, applyMiddleware(sagaMiddleware));
-  sagaMiddleware.run(sagas)
+  sagaMiddleware.run(sagas);
 
   if (module.hot) {
     module.hot.accept('./modules', () => {

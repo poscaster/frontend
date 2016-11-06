@@ -7,8 +7,8 @@
 .SignUp__Input
   @extend .SignIn__Input
 
-.SignUp__Input:focus
-  @extend .SignIn__Input:focus
+.SignUp__Input--Error, .SignUp__Input:invalid
+  @extend .SignIn__Input--Error
 
 .SignUp__InputGroup
   @extend .SignIn__InputGroup
@@ -16,5 +16,15 @@
 .SignUp__Input--WithBtn
   @extend .SignIn__Input--WithBtn
 
+.SignUp__Input--WithBtn--Error, .SignUp__Input--WithBtn:invalid
+  @extend .SignIn__Input--WithBtn--Error
+
 .SignUp__Btn
   @extend .SignIn__Btn
+
+.SignUp__InputErrorMessages
+  color: $secondary-error-color
+  font-size: 75%
+  margin: 1px auto
+  text-align: right
+  width: calc(100% - 30px)

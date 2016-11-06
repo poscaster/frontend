@@ -15,7 +15,7 @@
 
 Run on a custom port:
 
-    npm run dev:serve -- --port 8888
+    env API_BASE="http://localhost:4000/api" npm run dev:serve -- --port 8888
 
 ### Development
 

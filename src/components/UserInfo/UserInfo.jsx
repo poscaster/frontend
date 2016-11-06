@@ -6,27 +6,21 @@ import './UserInfo.sass';
 
 class UserInfo extends React.Component {
   constructor() {
-    super(...arguments);
+    super();
 
+    this.toggleTabHandler = this.toggleTabHandler.bind(this);
     this.state = { tab: 'SIGN_IN' };
   }
 
-  toggleTab(tab) {
-    this.setState({ tab });
+  toggleTabHandler(tab) {
+    return (function toggleTab() {
+      this.setState({ tab });
+    }).bind(this);
   }
 
-  render() {
-    return (
-      <div className="UserInfo">
-        {this.props.user
-          ? this.userInfo(this.props.user)
-          : this.signUpInBlock()
-        }
-      </div>
-    );
-  }
-
-  userInfo(user) {
+  userInfo() {
+    // TODO: Add actual info
+    const user = this.props.user; // eslint-disable-line no-unused-vars
     return (
       <div />
     );
@@ -34,33 +28,42 @@ class UserInfo extends React.Component {
 
   signUpInBlock() {
     const tab = this.state.tab;
+    let signUpIn;
+    switch (tab) {
+      case 'SIGN_IN':
+        signUpIn = <SignIn />;
+        break;
+      case 'SIGN_UP':
+        signUpIn = <SignUp />;
+        break;
+      default:
+    }
 
     return (
       <div>
         <ul className="UserInfo__Tabs">
-          <li className={`UserInfo__Tab ${tab === 'SIGN_IN' ? 'UserInfo__Tab--Active' : ''}`}>
-            <a onClick={this.toggleTab.bind(this, 'SIGN_IN')} href="javascript:;">Sign In</a>
+          <li className={`UserInfo__Tab${tab === 'SIGN_IN' ? '--Active' : ''}`}>
+            <a tabIndex="0" onClick={this.toggleTabHandler('SIGN_IN')}>Sign In</a>
           </li>
-          <li className={`UserInfo__Tab ${tab === 'SIGN_UP' ? 'UserInfo__Tab--Active' : ''}`}>
-            <a onClick={this.toggleTab.bind(this, 'SIGN_UP')} href="javascript:;">Sign Up</a>
+          <li className={`UserInfo__Tab${tab === 'SIGN_UP' ? '--Active' : ''}`}>
+            <a tabIndex="0" onClick={this.toggleTabHandler('SIGN_UP')}>Sign Up</a>
           </li>
         </ul>
-        {this.signUpIn(tab)}
+        {signUpIn}
       </div>
     );
   }
 
-  signUpIn(tab) {
-    switch (tab) {
-    case 'SIGN_IN':
-      return <SignIn />;
-    case 'SIGN_UP':
-      return <SignUp />;
-    }
+  render() {
+    return (
+      <div className="UserInfo">
+        {this.props.user ? this.userInfo() : this.signUpInBlock()}
+      </div>
+    );
   }
 }
 
-UserInfo.propTypes = { user: PropTypes.object };
+UserInfo.propTypes = { user: PropTypes.objectOf(PropTypes.string) };
 
 function mapStateToProps({ auth }) {
   return { user: auth.get('user') };

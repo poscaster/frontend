@@ -1,26 +1,25 @@
-import React, { PropTypes, renderToString } from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { toggleLeftMenu } from '../../modules/layout';
 import UserInfo from '../UserInfo/UserInfo';
 import './LeftMenu.sass';
 
-class LeftMenu extends React.Component {
-  render() {
-    return (
-      <nav className={`LeftMenu LeftMenu--${this.props.expanded ? 'Expanded' : 'Collapsed'}`}>
-        <button className={`LeftMenu__ToggleBtn LeftMenu__${this.props.expanded ? 'Collapse' : 'Expand'}Btn`}
-                onClick={this.props.toggle}
-                dangerouslySetInnerHTML={{__html: this.props.expanded ? '<' : '&#9776;'}}>
-        </button>
-        {this.props.expanded &&
-          <div className="LeftMenu__Content">
-            <UserInfo />
-          </div>
-        }
-      </nav>
-    );
-  }
-};
+function LeftMenu(props) {
+  return (
+    <nav className={`LeftMenu--${props.expanded ? 'Expanded' : 'Collapsed'}`}>
+      <button
+        className="LeftMenu__ToggleBtn"
+        onClick={props.toggle}
+        dangerouslySetInnerHTML={{ __html: props.expanded ? '<' : '&#9776;' }}
+      />
+      {props.expanded &&
+        <div className="LeftMenu__Content">
+          <UserInfo />
+        </div>
+      }
+    </nav>
+  );
+}
 
 LeftMenu.propTypes = {
   expanded: PropTypes.bool,

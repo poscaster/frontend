@@ -1,5 +1,9 @@
 @import '../../stylesheets/_base'
 
+@mixin error-outline
+  outline: $secondary-error-color 1px solid
+
+
 .SignIn
   margin: 0 10px
 
@@ -14,22 +18,37 @@
   &:focus
     outline: none
 
+.SignIn__Input--Error, .SignIn__Input:invalid
+  @extend .SignIn__Input
+  @include error-outline
+
 .SignIn__InputGroup
   white-space: nowrap
-  width: calc(100% - 20px);
+  width: calc(100% - 10px);
 
 .SignIn__Input--WithBtn
   @extend .SignIn__Input
-  width: calc(100% - 30px);
+  width: calc(100% - 40px);
+
+.SignIn__Input--WithBtn--Error, .SignIn__Input--WithBtn:invalid
+  @extend .SignIn__Input--WithBtn
+  @include error-outline
 
 .SignIn__Btn
   background-color: $secondary-bg-color-light
   border: none
   color: inherit
   cursor: pointer
+  display: block
+  float: right
   margin: 1px 0
   padding: 5px
   width: 30px
 
   &:focus
     outline: none
+
+.SignIn__ErrorMessage
+  color: $secondary-error-color
+  margin: 3px auto
+  text-align: center
