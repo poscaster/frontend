@@ -7,7 +7,7 @@ import { SIGN_IN_REQUESTED, SIGN_OUT_REQUESTED, SIGN_UP_REQUESTED,
          signUpSuccess, signUpError,
          getJWT } from '../modules/auth';
 
-function* signInAsync({ user }) {
+export function* signInAsync({ user }) {
   const response = yield call(API.signIn, { user });
 
   if (response.status >= 200 && response.status < 300) {
@@ -35,7 +35,7 @@ function* signInAsync({ user }) {
   }
 }
 
-function* signOutAsync() {
+export function* signOutAsync() {
   const jwt = yield select(getJWT);
   const response = yield call(API.signOut, undefined, { jwt });
 
@@ -44,7 +44,7 @@ function* signOutAsync() {
   }
 }
 
-function* signUpAsync({ user }) {
+export function* signUpAsync({ user }) {
   const response = yield call(API.signUp, { user });
 
   if (response.status >= 200 && response.status < 300) {

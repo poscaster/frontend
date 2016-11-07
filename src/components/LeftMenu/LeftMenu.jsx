@@ -10,7 +10,7 @@ function LeftMenu(props) {
       <button
         className="LeftMenu__ToggleBtn"
         onClick={props.toggle}
-        dangerouslySetInnerHTML={{ __html: props.expanded ? '<' : '&#9776;' }}
+        dangerouslySetInnerHTML={{ __html: props.expanded ? '&lt;' : '&#9776;' }}
       />
       {props.expanded &&
         <div className="LeftMenu__Content">

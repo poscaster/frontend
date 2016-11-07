@@ -12,7 +12,7 @@ const mockStore = configureMockStore();
 
 describe('Counter', () => {
   it('displays current count and buttons', () => {
-    const store = mockStore({ counter: new Map({ count: 321 }) });
+    const store = mockStore({ counter: Map({ count: 321 }) });
     const component = render(<Counter store={store} />);
 
     expect(component.find('.Counter__DecrementButton').text()).to.equal('-');
@@ -21,7 +21,7 @@ describe('Counter', () => {
   });
 
   it('decrements value', () => {
-    const store = mockStore({ counter: new Map({ count: 321 }) });
+    const store = mockStore({ counter: Map({ count: 321 }) });
     const component = mount(<Counter store={store} />);
 
     component.find('.Counter__DecrementButton').simulate('click');
@@ -30,7 +30,7 @@ describe('Counter', () => {
   });
 
   it('increments value', () => {
-    const store = mockStore({ counter: new Map({ count: 321 }) });
+    const store = mockStore({ counter: Map({ count: 321 }) });
     const component = mount(<Counter store={store} />);
 
     component.find('.Counter__IncrementButton').simulate('click');
