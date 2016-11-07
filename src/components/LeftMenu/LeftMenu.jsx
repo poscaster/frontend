@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { toggleLeftMenu } from '../../modules/layout';
-import UserInfo from '../UserInfo/UserInfo';
+import LeftMenuUserBlock from '../LeftMenuUserBlock/LeftMenuUserBlock';
 import './LeftMenu.sass';
 
 function LeftMenu(props) {
@@ -14,7 +14,7 @@ function LeftMenu(props) {
       />
       {props.expanded &&
         <div className="LeftMenu__Content">
-          <UserInfo />
+          <LeftMenuUserBlock />
         </div>
       }
     </nav>

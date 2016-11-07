@@ -2,35 +2,6 @@
 
 .UserInfo
 
-.UserInfo__Tabs
-  margin: 0 10px 5px
-  padding: 8px 0 0
-
-
-@mixin user-info-tab
-  display: inline
-
-  a
-    border-bottom: 1px solid $secondary-color
-    color: $secondary-color
-    cursor: pointer
-    padding: 2px 5px
-    text-decoration: none
-
-    &:hover
-      border-bottom-width: 2px
-      text-shadow: 2px 2px mix($secondary-color, $secondary-bg-color, 20%)
-
-    &:focus
-      outline: none
-
-.UserInfo__Tab
-  @include user-info-tab
-
-.UserInfo__Tab--Active
-  @include user-info-tab
-
-  a
-    border-bottom-color: $secondary-color-lighter
-    color: $secondary-color-lighter
-    text-shadow: 1px 1px mix($secondary-color, $secondary-bg-color, 40%)
+.UserInfo__Line
+  font-size: 85%
+  margin: calc(-1.3em - 3px) 10px 0

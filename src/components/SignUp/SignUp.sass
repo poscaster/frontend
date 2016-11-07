@@ -7,8 +7,9 @@
 .SignUp__Input
   @extend .SignIn__Input
 
-.SignUp__Input--Error, .SignUp__Input:invalid
-  @extend .SignIn__Input--Error
+.SignUp__Input--Error:not(:active), .SignUp__Input:invalid:not(:active)
+  @extend .SignIn__Input
+  @include error-outline
 
 .SignUp__InputGroup
   @extend .SignIn__InputGroup
@@ -16,8 +17,9 @@
 .SignUp__Input--WithBtn
   @extend .SignIn__Input--WithBtn
 
-.SignUp__Input--WithBtn--Error, .SignUp__Input--WithBtn:invalid
-  @extend .SignIn__Input--WithBtn--Error
+.SignUp__Input--WithBtn--Error:not(:active), .SignUp__Input--WithBtn:invalid:not(:active)
+  @extend .SignIn__Input--WithBtn
+  @include error-outline
 
 .SignUp__Btn
   @extend .SignIn__Btn

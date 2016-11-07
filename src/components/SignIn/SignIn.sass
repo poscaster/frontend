@@ -18,7 +18,7 @@
   &:focus
     outline: none
 
-.SignIn__Input--Error, .SignIn__Input:invalid
+.SignIn__Input--Error:not(:active), .SignIn__Input:invalid:not(:active)
   @extend .SignIn__Input
   @include error-outline
 
@@ -30,7 +30,7 @@
   @extend .SignIn__Input
   width: calc(100% - 40px);
 
-.SignIn__Input--WithBtn--Error, .SignIn__Input--WithBtn:invalid
+.SignIn__Input--WithBtn--Error:not(:active), .SignIn__Input--WithBtn:invalid:not(:active)
   @extend .SignIn__Input--WithBtn
   @include error-outline
 
