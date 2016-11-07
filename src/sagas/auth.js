@@ -1,22 +1,46 @@
 import { takeEvery } from 'redux-saga';
-import { apply, call, put } from 'redux-saga/effects';
+import { apply, call, put, select } from 'redux-saga/effects';
 import API from '../api';
-import { SIGN_IN_REQUESTED, SIGN_UP_REQUESTED, signInSuccess, signInError, signUpSuccess, signUpError } from '../modules/auth';
+import { SIGN_IN_REQUESTED, SIGN_OUT_REQUESTED, SIGN_UP_REQUESTED,
+         signInSuccess, signInError,
+         signOutSuccess,
+         signUpSuccess, signUpError,
+         getJWT } from '../modules/auth';
 
 function* signInAsync({ user }) {
   const response = yield call(API.signIn, { user });
 
   if (response.status >= 200 && response.status < 300) {
-    const data = yield apply(response, response.json);
-    yield put(signInSuccess(data));
+    try {
+      const data = yield apply(response, response.json);
+      yield put(signInSuccess(data));
+    } catch (e) {
+      yield put(signInError({ error: e.message, response }));
+    }
   } else {
-    const error = yield apply(response, response.json);
-    const errorData = {
-      status: response.statusText,
-      error,
-      response,
-    };
-    yield put(signInError(errorData));
+    try {
+      const error = yield apply(response, response.json);
+      yield put(signInError({
+        status: response.statusText,
+        error,
+        response,
+      }));
+    } catch (e) {
+      yield put(signInError({
+        status: response.statusText,
+        error: 'Sign In error',
+        response,
+      }));
+    }
+  }
+}
+
+function* signOutAsync() {
+  const jwt = yield select(getJWT);
+  const response = yield call(API.signOut, undefined, { jwt });
+
+  if (response.status >= 200 && response.status < 300) {
+    yield put(signOutSuccess());
   }
 }
 
@@ -24,22 +48,37 @@ function* signUpAsync({ user }) {
   const response = yield call(API.signUp, { user });
 
   if (response.status >= 200 && response.status < 300) {
-    const data = yield apply(response, response.json);
-    yield put(signUpSuccess(data));
-    yield* signInAsync({ user: { login: user.login, password: user.password } });
+    try {
+      const data = yield apply(response, response.json);
+      yield put(signUpSuccess(data));
+      yield* signInAsync({ user: { login: user.login, password: user.password } });
+    } catch (e) {
+      yield put(signUpError({ error: e.message, response }));
+    }
   } else {
-    const error = yield apply(response, response.json);
-    const errorData = {
-      status: response.statusText,
-      error,
-      response,
-    };
-    yield put(signUpError(errorData));
+    try {
+      const error = yield apply(response, response.json);
+      yield put(signUpError({
+        status: response.statusText,
+        error,
+        response,
+      }));
+    } catch (e) {
+      yield put(signUpError({
+        status: response.statusText,
+        error: 'Sign Up error',
+        response,
+      }));
+    }
   }
 }
 
 function* signInSaga() {
   yield* takeEvery(SIGN_IN_REQUESTED, signInAsync);
+}
+
+function* signOutSaga() {
+  yield* takeEvery(SIGN_OUT_REQUESTED, signOutAsync);
 }
 
 function* signUpSaga() {
@@ -49,6 +88,7 @@ function* signUpSaga() {
 export default function authSagas() {
   return [
     signInSaga(),
+    signOutSaga(),
     signUpSaga(),
   ];
 }

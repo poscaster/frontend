@@ -2,7 +2,7 @@ import { Map } from 'immutable';
 
 const TOGGLE_LEFT_MENU = 'poscaster/layout/TOGGLE_LEFT_MENU';
 
-const initialState = new Map({ leftMenuExpanded: false });
+const initialState = new Map({ leftMenuExpanded: true });
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {

@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import SignIn from '../SignIn/SignIn';
+import SignOut from '../SignOut/SignOut';
 import SignUp from '../SignUp/SignUp';
 import './UserInfo.sass';
 
@@ -22,7 +23,9 @@ class UserInfo extends React.Component {
     // TODO: Add actual info
     const user = this.props.user; // eslint-disable-line no-unused-vars
     return (
-      <div />
+      <div className="UserInfo__Main">
+        <SignOut />
+      </div>
     );
   }
 
@@ -40,13 +43,13 @@ class UserInfo extends React.Component {
     }
 
     return (
-      <div>
+      <div className="UserInfo">
         <ul className="UserInfo__Tabs">
           <li className={`UserInfo__Tab${tab === 'SIGN_IN' ? '--Active' : ''}`}>
-            <a tabIndex="0" onClick={this.toggleTabHandler('SIGN_IN')}>Sign In</a>
+            <a tabIndex="0" href="javascript:;" onClick={this.toggleTabHandler('SIGN_IN')}>Sign In</a>
           </li>
           <li className={`UserInfo__Tab${tab === 'SIGN_UP' ? '--Active' : ''}`}>
-            <a tabIndex="0" onClick={this.toggleTabHandler('SIGN_UP')}>Sign Up</a>
+            <a tabIndex="0" href="javascript:;" onClick={this.toggleTabHandler('SIGN_UP')}>Sign Up</a>
           </li>
         </ul>
         {signUpIn}
@@ -66,7 +69,9 @@ class UserInfo extends React.Component {
 UserInfo.propTypes = { user: PropTypes.objectOf(PropTypes.string) };
 
 function mapStateToProps({ auth }) {
-  return { user: auth.get('user') };
+  let user = auth.get('user');
+  if (user) user = user.toJS();
+  return { user };
 }
 
 export default connect(mapStateToProps)(UserInfo);

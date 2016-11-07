@@ -44,8 +44,8 @@ class SignUp extends React.Component {
       errors &&
         <p key="errors" className="SignUp__InputErrorMessages">
           {[].concat(...errors.map((error, i) =>
-                                   [', ', <span key={i}>{error}</span>]
-                                  )).slice(1)}
+             [', ', <span key={i}>{error}</span>],
+           )).slice(1)}
         </p>,
     ];
   }

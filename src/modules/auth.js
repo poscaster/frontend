@@ -45,6 +45,10 @@ export default function reducer(state = initialState, action) {
   }
 }
 
+export function getJWT(state) {
+  return state.auth.get('jwt');
+}
+
 export function signIn(user) {
   return { type: SIGN_IN_REQUESTED, user };
 }
@@ -55,6 +59,14 @@ export function signInSuccess(data) {
 
 export function signInError(errors) {
   return { type: SIGN_IN_FAILED, errors };
+}
+
+export function signOut() {
+  return { type: SIGN_OUT_REQUESTED };
+}
+
+export function signOutSuccess() {
+  return { type: SIGN_OUT_SUCCEED };
 }
 
 export function signUp(user) {
