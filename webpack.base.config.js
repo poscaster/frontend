@@ -14,32 +14,39 @@ module.exports = {
     chunkFilename: '[name].[chunkhash].chunk.js',
   },
   module: {
-    loaders: [{
+    rules: [{
       test: /\.jsx?$/,
       exclude: /node_modules/,
-      loader: 'babel',
+      use: 'babel-loader',
     }, {
       test: /\.sass$/,
       exclude: /node_modules/,
-      loaders: ['style', 'css', 'postcss', 'sass'],
+      use: [
+        'style-loader',
+        {
+          loader: 'css-loader',
+          options: { importLoaders: 1 }
+        }, {
+          loader: 'postcss-loader',
+          options: { plugins: () => [ require('autoprefixer') ] }
+        },
+        'sass-loader'
+      ],
     }, {
       test: /\.(jpg|png|gif)$/,
-      loader: 'url-loader?limit=8192',
+      use: 'url-loader?limit=8192',
     }, {
       test: /\.(eot|svg|ttf|woff|woff2)(\?v=[0-9.]*)?$/,
-      loader: 'file-loader',
+      use: 'file-loader',
     }, {
       test: /\.json$/,
-      loader: 'json-loader',
+      use: 'json-loader',
     }],
   },
   resolve: {
-    extensions: ['', '.js', '.json', '.jsx', '.jsx', '.sass'],
+    extensions: ['.js', '.json', '.jsx', '.jsx', '.sass'],
   },
   target: 'web',
-  postcss: function() {
-    return [ require('autoprefixer') ];
-  },
   plugins: [
     new webpack.DefinePlugin({
       API_BASE: `'${process.env.API_BASE || '/api'}'`,

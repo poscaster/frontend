@@ -4,11 +4,11 @@ import 'ignore-styles';
 import chai from 'chai';
 import chaiEnzyme from 'chai-enzyme';
 import chaiImmutable from 'chai-immutable';
-import jsdom from 'jsdom';
+import { JSDOM } from 'jsdom';
 import sinonChai from 'sinon-chai';
 
-const doc = jsdom.jsdom('<!doctype html><html><head></head><body></body></html>');
-const win = doc.defaultView;
+const win = (new JSDOM('<!doctype html><html><head></head><body></body></html>')).window;
+const doc = win.document;
 
 global.document = doc;
 global.window = win;

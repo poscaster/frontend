@@ -1,7 +1,9 @@
+import Cookies from 'js-cookie';
 import { takeEvery } from 'redux-saga';
 import { apply, call, put, select } from 'redux-saga/effects';
 import API from '../api';
-import { SIGN_IN_REQUESTED, SIGN_OUT_REQUESTED, SIGN_UP_REQUESTED,
+import { SIGN_IN_REQUESTED, SIGN_IN_FROM_COOKIE_REQUESTED, SIGN_OUT_REQUESTED,
+         SIGN_UP_REQUESTED,
          signInSuccess, signInError,
          signOutSuccess,
          signUpSuccess, signUpError,
@@ -31,6 +33,23 @@ export function* signInAsync({ user }) {
         error: 'Sign In error',
         response,
       }));
+    }
+  }
+}
+
+export function* signInFromCookieAsync() {
+  const [ jwt, exp ] = (Cookies.get('poscaster-auth') || '').split('|');
+
+  if (parseInt(exp) > new Date()/1000) {
+    const response = yield call(API.getSession, null, { jwt });
+
+    if (response.status >= 200 && response.status < 300) {
+      try {
+        const data = yield apply(response, response.json);
+        yield put(signInSuccess(data));
+      } catch (e) {
+        yield put(signInError({ error: e.message, response }));
+      }
     }
   }
 }
@@ -77,6 +96,10 @@ function* signInSaga() {
   yield* takeEvery(SIGN_IN_REQUESTED, signInAsync);
 }
 
+function* signInFromCookieSaga() {
+  yield* takeEvery(SIGN_IN_FROM_COOKIE_REQUESTED, signInFromCookieAsync);
+}
+
 function* signOutSaga() {
   yield* takeEvery(SIGN_OUT_REQUESTED, signOutAsync);
 }
@@ -88,6 +111,7 @@ function* signUpSaga() {
 export default function authSagas() {
   return [
     signInSaga(),
+    signInFromCookieSaga(),
     signOutSaga(),
     signUpSaga(),
   ];

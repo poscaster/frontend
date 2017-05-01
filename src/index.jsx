@@ -1,8 +1,9 @@
 /* global document */
+import { createBrowserHistory } from 'history';
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { Router, Route, browserHistory } from 'react-router';
+import { Router, Route } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import makeStore from './store';
 import App from './components/App/App';
@@ -11,12 +12,12 @@ import './stylesheets/styles.sass';
 
 const store = makeStore();
 
-const history = syncHistoryWithStore(browserHistory, store);
+const history = syncHistoryWithStore(createBrowserHistory(), store);
 
 const routes = (
-  <Route component={App}>
+  <App>
     <Route path="/" component={Home} />
-  </Route>
+  </App>
 );
 
 

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import LeftMenu from '../LeftMenu/LeftMenu';
 import './Layout.sass';
@@ -16,5 +17,5 @@ export default function Layout(props) {
 }
 
 Layout.propTypes = {
-  children: React.PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
 };

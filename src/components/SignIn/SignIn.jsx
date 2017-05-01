@@ -1,9 +1,17 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { connect } from 'react-redux';
 import { signIn } from '../../modules/auth';
 import './SignIn.sass';
 
 class SignIn extends React.Component {
+  static propTypes = {
+    signIn: PropTypes.func.isRequired,
+    error: PropTypes.string,
+  };
+
+  static defaultProps = { error: null };
+
   constructor() {
     super();
 
@@ -48,11 +56,6 @@ class SignIn extends React.Component {
     );
   }
 }
-
-SignIn.propTypes = {
-  signIn: PropTypes.func.isRequired,
-  error: PropTypes.string,
-};
 
 function mapStateToProps({ auth }) {
   return { error: auth.getIn(['signInErrors', 'error', 'error']) };
