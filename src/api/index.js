@@ -3,7 +3,7 @@ import subscriptions from './subscriptions';
 
 const API = {
   ...auth,
-  ...subscriptions
+  ...subscriptions,
 };
 
 export default API;

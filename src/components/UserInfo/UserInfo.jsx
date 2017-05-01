@@ -11,3 +11,5 @@ export default function UserInfo(props) {
 }
 
 UserInfo.propTypes = { user: PropTypes.objectOf(PropTypes.string) };
+
+UserInfo.defaultProps = { user: {} };

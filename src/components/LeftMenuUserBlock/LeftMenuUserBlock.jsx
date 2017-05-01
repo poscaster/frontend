@@ -8,6 +8,9 @@ import UserInfo from '../UserInfo/UserInfo';
 import './LeftMenuUserBlock.sass';
 
 class LeftMenuUserBlock extends React.Component {
+  static propTypes = { user: PropTypes.objectOf(PropTypes.string) }
+  static defaultProps = { user: {} }
+
   constructor() {
     super();
 
@@ -66,8 +69,6 @@ class LeftMenuUserBlock extends React.Component {
     );
   }
 }
-
-LeftMenuUserBlock.propTypes = { user: PropTypes.objectOf(PropTypes.string) };
 
 function mapStateToProps({ auth }) {
   let user = auth.get('user');

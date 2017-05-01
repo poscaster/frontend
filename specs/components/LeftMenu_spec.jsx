@@ -9,6 +9,7 @@ import LeftMenu from '../../src/components/LeftMenu/LeftMenu';
 import { toggleLeftMenu } from '../../src/modules/layout';
 
 const mockStore = configureMockStore();
+// istanbul ignore next
 const noop = () => {};
 
 describe('LeftMenu', () => {

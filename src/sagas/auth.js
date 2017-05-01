@@ -38,9 +38,9 @@ export function* signInAsync({ user }) {
 }
 
 export function* signInFromCookieAsync() {
-  const [ jwt, exp ] = (Cookies.get('poscaster-auth') || '').split('|');
+  const [jwt, exp] = (Cookies.get('poscaster-auth') || '').split('|');
 
-  if (parseInt(exp) > new Date()/1000) {
+  if (parseInt(exp, 10) > new Date() / 1000) {
     const response = yield call(API.getSession, null, { jwt });
 
     if (response.status >= 200 && response.status < 300) {

@@ -21,6 +21,7 @@
     "node": "~>6"
   },
   "dependencies": {
+    "history": "^4.6.1",
     "immutable": "^3.8.1",
     "js-cookie": "^2.1.4",
     "normalize.css": "^6.0.0",

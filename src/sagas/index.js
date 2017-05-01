@@ -4,6 +4,6 @@ import subscriptionsSagas from './subscriptions';
 export default function* rootSaga() {
   yield [
     ...authSagas(),
-    ...subscriptionsSagas()
+    ...subscriptionsSagas(),
   ];
 }
