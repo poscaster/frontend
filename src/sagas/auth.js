@@ -59,6 +59,7 @@ export function* signOutAsync() {
   const response = yield call(API.signOut, undefined, { jwt });
 
   if (response.status >= 200 && response.status < 300) {
+    Cookies.remove('poscaster-auth');
     yield put(signOutSuccess());
   }
 }

@@ -3,11 +3,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { toggleLeftMenuAddSubscription } from '../../modules/layout';
 import { addSubscription } from '../../modules/subscriptions';
+import './LeftMenuSubscriptionsBlock.sass';
 
 class LeftMenuSubscriptionsBlock extends React.Component {
   static propTypes = {
     addSubscrption: PropTypes.func.isRequired,
     expanded: PropTypes.bool,
+    toggle: PropTypes.func.isRequired,
   };
 
   static defaultProps = { expanded: false };
@@ -22,17 +24,35 @@ class LeftMenuSubscriptionsBlock extends React.Component {
     this.props.addSubscrption(this.state.url);
   }
 
+  expand = () => {
+    if (!this.props.expanded) {
+      this.props.toggle();
+    }
+  }
+
+  collapseIfEmpty = () => {
+    if (this.props.expanded && !this.state.url) {
+      this.props.toggle();
+    }
+  }
+
   render() {
     return (
       <div className="LeftMenuSubscriptionsBlock">
         <input
           type="text"
-          className={`LeftMenuSubscriptionsBlock__Input-${this.props.expanded ? 'Expanded' : 'Collapsed'}`}
+          className={`LeftMenuSubscriptionsBlock__Input--${this.props.expanded ? 'Expanded' : 'Collapsed'}`}
           value={this.state.url}
           onChange={this.updateUrl}
+          placeholder={this.props.expanded ? '' : 'http://...'}
+          onFocus={this.expand}
+          onBlur={this.collapseIfEmpty}
         />
-        <button className="LeftMenuSubscriptionsBlock__SubscribeBtn" onClick={this.addSubscription}>
-          + Subscribe
+        <button
+          className="LeftMenuSubscriptionsBlock__SubscribeBtn"
+          onClick={this.addSubscription}
+        >
+          +
         </button>
       </div>
     );
@@ -48,7 +68,7 @@ function mapStateToProps({ layout }) {
 function mapDispatchToProps(dispatch) {
   return {
     addSubscrption: url => dispatch(addSubscription(url)),
-    expand: () => dispatch(toggleLeftMenuAddSubscription()),
+    toggle: () => dispatch(toggleLeftMenuAddSubscription()),
   };
 }
 

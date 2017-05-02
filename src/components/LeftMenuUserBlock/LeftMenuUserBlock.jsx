@@ -27,8 +27,12 @@ class LeftMenuUserBlock extends React.Component {
   userInfo() {
     return (
       <div>
-        <SignOut />
-        <UserInfo user={this.props.user} />
+        <div className="LeftMenuUserBlock__SignOut">
+          <SignOut />
+        </div>
+        <div className="LeftMenuUserBlock__UserInfo">
+          <UserInfo user={this.props.user} />
+        </div>
       </div>
     );
   }

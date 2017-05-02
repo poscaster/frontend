@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { describe, it, afterEach } from 'mocha';
+import { describe, it, beforeEach, afterEach } from 'mocha';
 import { stub } from 'sinon';
 import Cookies from 'js-cookie';
 import { call, put, select } from 'redux-saga/effects';
@@ -135,6 +135,10 @@ describe('authSagas', () => {
   describe('signOutAsync', () => {
     const jwt = 'jwtstring';
 
+    beforeEach(() => {
+      stub(Cookies, 'remove');
+    });
+
     it('calls API signOut successfully', () => {
       const generator = signOutAsync();
       let next = generator.next();
@@ -142,6 +146,7 @@ describe('authSagas', () => {
       next = generator.next(jwt);
       expect(next.value).to.deep.equal(call(API.signOut, undefined, { jwt }));
       next = generator.next({ status: 200 });
+      expect(Cookies.remove).to.have.been.calledWith('poscaster-auth');
 
       expect(next.value).to.deep.equal(put(signOutSuccess()));
     });
@@ -153,8 +158,13 @@ describe('authSagas', () => {
       next = generator.next(jwt);
       expect(next.value).to.deep.equal(call(API.signOut, undefined, { jwt }));
       next = generator.next({ status: 400 });
+      expect(Cookies.remove).to.have.not.been.called();
 
-      expect(next.value).to.equal(undefined);
+      expect(next).to.deep.equal({ value: undefined, done: true });
+    });
+
+    afterEach(() => {
+      Cookies.remove.restore();
     });
   });
 

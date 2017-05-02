@@ -4,6 +4,8 @@ import 'ignore-styles';
 import chai from 'chai';
 import chaiEnzyme from 'chai-enzyme';
 import chaiImmutable from 'chai-immutable';
+import dirtyChai from 'dirty-chai';
+
 import { JSDOM } from 'jsdom';
 import sinonChai from 'sinon-chai';
 
@@ -21,4 +23,5 @@ Object.keys(window).forEach((key) => {
 
 chai.use(chaiEnzyme());
 chai.use(chaiImmutable);
+chai.use(dirtyChai);
 chai.use(sinonChai);

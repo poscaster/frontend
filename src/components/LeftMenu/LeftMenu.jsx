@@ -17,6 +17,7 @@ function LeftMenu(props) {
       {props.expanded ?
         <div className="LeftMenu__Content">
           <LeftMenuUserBlock />
+          <div className="LeftMenu__Clearfix" />
           {props.authorized && <LeftMenuSubscriptionsBlock />}
         </div>
        : []
