@@ -10,9 +10,9 @@ class LeftMenuSubscriptionsBlock extends React.Component {
     addSubscrption: PropTypes.func.isRequired,
     expanded: PropTypes.bool,
     toggle: PropTypes.func.isRequired,
-  };
+  }
 
-  static defaultProps = { expanded: false };
+  static defaultProps = { expanded: false }
 
   state = { url: '' }
 
