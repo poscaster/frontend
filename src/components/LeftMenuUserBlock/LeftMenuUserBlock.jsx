@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { connect } from 'react-redux';
 import SignIn from '../SignIn/SignIn';
 import SignOut from '../SignOut/SignOut';
@@ -7,6 +8,9 @@ import UserInfo from '../UserInfo/UserInfo';
 import './LeftMenuUserBlock.sass';
 
 class LeftMenuUserBlock extends React.Component {
+  static propTypes = { user: PropTypes.objectOf(PropTypes.string) }
+  static defaultProps = { user: {} }
+
   constructor() {
     super();
 
@@ -23,8 +27,12 @@ class LeftMenuUserBlock extends React.Component {
   userInfo() {
     return (
       <div>
-        <SignOut />
-        <UserInfo user={this.props.user} />
+        <div className="LeftMenuUserBlock__SignOut">
+          <SignOut />
+        </div>
+        <div className="LeftMenuUserBlock__UserInfo">
+          <UserInfo user={this.props.user} />
+        </div>
       </div>
     );
   }
@@ -65,8 +73,6 @@ class LeftMenuUserBlock extends React.Component {
     );
   }
 }
-
-LeftMenuUserBlock.propTypes = { user: PropTypes.objectOf(PropTypes.string) };
 
 function mapStateToProps({ auth }) {
   let user = auth.get('user');

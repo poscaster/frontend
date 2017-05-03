@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import './UserInfo.sass';
 
 export default function UserInfo(props) {
@@ -10,3 +11,5 @@ export default function UserInfo(props) {
 }
 
 UserInfo.propTypes = { user: PropTypes.objectOf(PropTypes.string) };
+
+UserInfo.defaultProps = { user: {} };

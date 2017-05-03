@@ -8,15 +8,9 @@
   margin: 0 10px
 
 .SignIn__Input
-  background-color: $secondary-bg-color-light
-  border: none
-  color: inherit
+  @include left-menu-input
   margin: 1px 0
-  padding: 5px
   width: calc(100% - 20px)
-
-  &:focus
-    outline: none
 
 .SignIn__Input--Error:not(:active), .SignIn__Input:invalid:not(:active)
   @extend .SignIn__Input

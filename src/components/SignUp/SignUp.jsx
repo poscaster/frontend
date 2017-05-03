@@ -1,9 +1,16 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { connect } from 'react-redux';
 import { signUp } from '../../modules/auth';
 import './SignUp.sass';
 
 class SignUp extends React.Component {
+  static propTypes = {
+    signUp: PropTypes.func.isRequired,
+    errors: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.string)),
+  }
+  static defaultProps = { errors: {} }
+
   constructor() {
     super();
 
@@ -43,8 +50,8 @@ class SignUp extends React.Component {
       />,
       errors &&
         <p key="errors" className="SignUp__InputErrorMessages">
-          {[].concat(...errors.map((error, i) =>
-             [', ', <span key={i}>{error}</span>],
+          {[].concat(...errors.map(error =>
+             [', ', <span key={error}>{error}</span>],
            )).slice(1)}
         </p>,
     ];
@@ -65,11 +72,6 @@ class SignUp extends React.Component {
     );
   }
 }
-
-SignUp.propTypes = {
-  signUp: PropTypes.func.isRequired,
-  errors: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.string)),
-};
 
 function mapStateToProps({ auth }) {
   const errorsMap = auth.getIn(['signUpErrors', 'error', 'errors', 'user']);

@@ -1,9 +1,11 @@
 import { expect } from 'chai';
 import { Map } from 'immutable';
 import { describe, it } from 'mocha';
+import { stub } from 'sinon';
 
+import Cookies from 'js-cookie';
 import authReducer, { getJWT,
-                      signIn, signInSuccess, signInError,
+                      signIn, signInFromCookie, signInSuccess, signInError,
                       signOut, signOutSuccess,
                       signUp, signUpSuccess, signUpError,
                     } from '../../src/modules/auth';
@@ -20,11 +22,21 @@ describe('authReducer', () => {
     expect(nextState).to.equal(Map({}));
   });
 
+  it('handles sign in from cooke request', () => {
+    const initialState = Map({});
+    const action = signInFromCookie({});
+    const nextState = authReducer(initialState, action);
+    expect(nextState).to.equal(Map({}));
+  });
+
   it('handles sign in success', () => {
+    stub(Cookies, 'set');
     const initialState = Map({ user: null });
     const action = signInSuccess({ jwt: 'jwt', exp: 'exp', user: { login: 'test' } });
     const nextState = authReducer(initialState, action);
     expect(nextState).to.equal(Map({ jwt: 'jwt', exp: 'exp', user: Map({ login: 'test' }) }));
+    expect(Cookies.set).to.have.been.calledWith('poscaster-auth', 'jwt|exp');
+    Cookies.set.restore();
   });
 
   it('handles sign in failure', () => {

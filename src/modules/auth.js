@@ -1,5 +1,7 @@
 import { Map, fromJS } from 'immutable';
+import Cookies from 'js-cookie';
 
+export const SIGN_IN_FROM_COOKIE_REQUESTED = 'poscaster/auth/SIGN_IN_FROM_COOKIE_REQUESTED';
 export const SIGN_IN_REQUESTED = 'poscaster/auth/SIGN_IN_REQUESTED';
 export const SIGN_IN_SUCCEED = 'poscaster/auth/SIGN_IN_SUCCEED';
 export const SIGN_IN_FAILED = 'poscaster/auth/SIGN_IN_FAILED';
@@ -16,6 +18,7 @@ export default function reducer(state = initialState, action) {
     case SIGN_IN_REQUESTED:
       return state.delete('signInErrors');
     case SIGN_IN_SUCCEED:
+      Cookies.set('poscaster-auth', `${action.jwt}|${action.exp}`);
       return state.merge({
         user: Map(action.user),
         jwt: action.jwt,
@@ -51,6 +54,10 @@ export function getJWT(state) {
 
 export function signIn(user) {
   return { type: SIGN_IN_REQUESTED, user };
+}
+
+export function signInFromCookie() {
+  return { type: SIGN_IN_FROM_COOKIE_REQUESTED };
 }
 
 export function signInSuccess(data) {
