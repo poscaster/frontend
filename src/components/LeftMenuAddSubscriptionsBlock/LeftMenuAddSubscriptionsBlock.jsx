@@ -3,9 +3,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { toggleLeftMenuAddSubscription } from '../../modules/layout';
 import { addSubscription } from '../../modules/subscriptions';
-import './LeftMenuSubscriptionsBlock.sass';
+import './LeftMenuAddSubscriptionsBlock.sass';
 
-class LeftMenuSubscriptionsBlock extends React.Component {
+class LeftMenuAddSubscriptionsBlock extends React.Component {
   static propTypes = {
     addSubscrption: PropTypes.func.isRequired,
     expanded: PropTypes.bool,
@@ -38,10 +38,10 @@ class LeftMenuSubscriptionsBlock extends React.Component {
 
   render() {
     return (
-      <div className="LeftMenuSubscriptionsBlock">
+      <div className="LeftMenuAddSubscriptionsBlock">
         <input
           type="text"
-          className={`LeftMenuSubscriptionsBlock__Input--${this.props.expanded ? 'Expanded' : 'Collapsed'}`}
+          className={`LeftMenuAddSubscriptionsBlock__Input--${this.props.expanded ? 'Expanded' : 'Collapsed'}`}
           value={this.state.url}
           onChange={this.updateUrl}
           placeholder={this.props.expanded ? '' : 'http://...'}
@@ -49,7 +49,7 @@ class LeftMenuSubscriptionsBlock extends React.Component {
           onBlur={this.collapseIfEmpty}
         />
         <button
-          className="LeftMenuSubscriptionsBlock__SubscribeBtn"
+          className="LeftMenuAddSubscriptionsBlock__SubscribeBtn"
           onClick={this.addSubscription}
         >
           +
@@ -72,4 +72,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LeftMenuSubscriptionsBlock);
+export default connect(mapStateToProps, mapDispatchToProps)(LeftMenuAddSubscriptionsBlock);
