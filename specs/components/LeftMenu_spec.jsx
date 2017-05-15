@@ -8,6 +8,8 @@ import configureMockStore from 'redux-mock-store';
 import LeftMenu from '../../src/components/LeftMenu/LeftMenu';
 import LeftMenuAddSubscriptionsBlock
 from '../../src/components/LeftMenuAddSubscriptionsBlock/LeftMenuAddSubscriptionsBlock';
+import LeftMenuSubscriptionsList
+from '../../src/components/LeftMenuSubscriptionsList/LeftMenuSubscriptionsList';
 import { toggleLeftMenu } from '../../src/modules/layout';
 
 const mockStore = configureMockStore();
@@ -20,6 +22,7 @@ describe('LeftMenu', () => {
 
     expect(component.find('.LeftMenu--Expanded')).to.be.present();
     expect(component.find(LeftMenuAddSubscriptionsBlock)).to.be.present();
+    expect(component.find(LeftMenuSubscriptionsList)).to.be.present();
   });
 
   it('redners properly when closed', () => {

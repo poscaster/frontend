@@ -3,7 +3,7 @@ import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 import { fetchSubscriptions } from '../../modules/subscriptions';
-// import './LeftMenuSubscrptionsList';
+import './LeftMenuSubscriptionsList.sass';
 
 class LeftMenuSubscrptionsList extends React.Component {
   static propTypes = {
@@ -28,9 +28,9 @@ class LeftMenuSubscrptionsList extends React.Component {
 
   renderSubscriptions() {
     return [
-      <h4>Subscriptions:</h4>,
-      <ul className="LeftMenuSubscrptionsList__List">
-        {this.props.subscriptions.map(s => <li key={s.feed_id}>{s.get('title')}</li>)}
+      <h4 key="header" className="LeftMenuSubscriptionsList__Header">Subscriptions:</h4>,
+      <ul key="list" className="LeftMenuSubscriptionsList__List">
+        {this.props.subscriptions.map(s => <li key={s.get('feed_id')} >{s.get('title')}</li>)}
       </ul>,
     ];
   }
@@ -40,7 +40,7 @@ class LeftMenuSubscrptionsList extends React.Component {
       <div className="LeftMenuSubscrptionsList">
         {this.props.subscriptions ?
          this.renderSubscriptions() :
-         <div className="LeftMenuSubscrptionsList__FetchingMsg">Fetching...</div>}
+         <div className="LeftMenuSubscriptionsList__FetchingMsg">Fetching...</div>}
       </div>
     );
   }

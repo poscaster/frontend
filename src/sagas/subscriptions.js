@@ -2,15 +2,17 @@ import { takeEvery } from 'redux-saga';
 import { apply, call, put, select } from 'redux-saga/effects';
 import API from '../api';
 import { getJWT } from '../modules/auth';
-import { ADD_SUBSCRIPTION, FETCH_SUBSCRIPTIONS, setSubscriptions } from '../modules/subscriptions';
+import { ADD_SUBSCRIPTION, FETCH_SUBSCRIPTIONS, setSubscriptions, fetchSubscriptions }
+from '../modules/subscriptions';
 
 export function* addSubscriptionAsync({ url }) {
   const jwt = yield select(getJWT);
   const response = yield call(API.addSubscription, { url }, { jwt });
 
   if (response.status >= 200 && response.status < 300) {
-    // alert(`Subscription ${url} added`);
+    yield put(fetchSubscriptions());
   } else {
+    // TODO(NH): Handle errors.
     // alert(`Error adding subscription ${url}`);
   }
 }
@@ -23,7 +25,7 @@ export function* fetchSubscriptionsAsync() {
     const data = yield apply(response, response.json);
     yield put(setSubscriptions(data.subscriptions));
   } else {
-    // Handle error
+    // TODO(NH): Handle error
   }
 }
 
