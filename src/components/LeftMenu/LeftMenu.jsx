@@ -3,22 +3,22 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { toggleLeftMenu } from '../../modules/layout';
 import LeftMenuUserBlock from '../LeftMenuUserBlock/LeftMenuUserBlock';
-import LeftMenuSubscriptionsBlock from '../LeftMenuSubscriptionsBlock/LeftMenuSubscriptionsBlock';
+import LeftMenuAddSubscriptionsBlock from '../LeftMenuAddSubscriptionsBlock/LeftMenuAddSubscriptionsBlock';
+import LeftMenuSubscriptionsList from '../LeftMenuSubscriptionsList/LeftMenuSubscriptionsList';
 import './LeftMenu.sass';
 
 function LeftMenu(props) {
   return (
     <nav className={`LeftMenu--${props.expanded ? 'Expanded' : 'Collapsed'}`}>
-      <button
-        className="LeftMenu__ToggleBtn"
-        onClick={props.toggle}
-        dangerouslySetInnerHTML={{ __html: props.expanded ? '&lt;' : '&#9776;' }}
-      />
+      <button className="LeftMenu__ToggleBtn" onClick={props.toggle} >
+        { props.expanded ? '<' : '\u2630' }
+      </button>
       {props.expanded ?
         <div className="LeftMenu__Content">
           <LeftMenuUserBlock />
           <div className="LeftMenu__Clearfix" />
-          {props.authorized && <LeftMenuSubscriptionsBlock />}
+          {props.authorized && <LeftMenuAddSubscriptionsBlock />}
+          {props.authorized && <LeftMenuSubscriptionsList />}
         </div>
        : []
       }
